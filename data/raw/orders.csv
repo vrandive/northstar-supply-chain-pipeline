@@ -1,0 +1,6 @@
+﻿order_id,customer,quantity
+1001,Walmart,500
+1002,Costco,abc
+1003,Target,300
+1004,,200
+1005,Kroger,0

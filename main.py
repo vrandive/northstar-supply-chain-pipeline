@@ -1,16 +1,41 @@
-# This is a sample Python script.
+import csv
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+result_error = []
+result_valid = []
+with open('data/raw/orders.csv', newline= '', encoding='utf-8-sig') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        error_dict = {}
+        valid_dict = {}
 
+        try:
+            quant = int(row['quantity'])
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+        except ValueError:
+            error_dict['order_id'] = row['order_id']
+            error_dict['customer'] = row['customer']
+            error_dict['quantity'] = row['quantity']
+            error_dict['status'] = "Invalid"
+            error_dict['reason'] = "The quantity must be an integer"
+            result_error.append(error_dict)
 
+        else:
+            if quant <= 0:
+                error_dict['order_id'] = row['order_id']
+                error_dict['customer'] = row['customer']
+                error_dict['quantity'] = row['quantity']
+                error_dict['status'] = "Invalid"
+                error_dict['reason'] = "Quantity must be greater than 0"
+                result_error.append(error_dict)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+            else:
+               valid_dict['order_id'] = row['order_id']
+               valid_dict['customer'] = row['customer']
+               valid_dict['quantity'] = quant
+               valid_dict['status'] = "Valid"
+               valid_dict['reason'] = "-"
+               result_valid.append(valid_dict)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print(result_valid)
+
+    print(result_error)
