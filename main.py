@@ -47,12 +47,25 @@ def validate_orders(data):
 
     return result_valid, result_error
 
+def transform_orders(valid_data):
+    transformed_data = []
+    for row in valid_data:
+        row['order_value'] = row['quantity']*12.50
+        transformed_data.append(row)
+    return transformed_data
+
+
+
 
 orders = load_orders('data/raw/orders.csv')
 valid, invalid = validate_orders(orders)
+transformed_data = transform_orders(valid)
 
 print(f"Valid Orders: {len(valid)}")
 print(f"Valid Records: {valid}")
 
 print(f"Invalid Orders: {len(invalid)}")
 print(f"Invalid Records: {invalid}")
+
+print(f"Transformed Orders: {len(transformed_data)}")
+print(f"Transformed Records: {transformed_data}")
