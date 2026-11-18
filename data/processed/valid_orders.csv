@@ -1,0 +1,3 @@
+﻿order_id,customer,quantity,status,reason,order_value
+1001,Walmart,500,Valid,-,6250.0
+1003,Target,300,Valid,-,3750.0

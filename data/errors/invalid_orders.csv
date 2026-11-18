@@ -1,0 +1,5 @@
+﻿order_id,customer,quantity,status,reason
+1002,Costco,abc,Invalid,Quantity must be an integer
+1004,,200,Invalid,Customer cannot be blank
+1005,Kroger,0,Invalid,Quantity must be greater than 0
+1006,,0,Invalid,"Quantity must be greater than 0, Customer cannot be blank"

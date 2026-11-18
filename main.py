@@ -54,12 +54,20 @@ def transform_orders(valid_data):
         transformed_data.append(row)
     return transformed_data
 
+def save_orders(file_path, data):
+    if data:
+        with open(file_path, mode = "w", newline='', encoding='utf-8-sig') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames= data[0].keys())
 
+            writer.writeheader()
+            writer.writerows(data)
 
 
 orders = load_orders('data/raw/orders.csv')
 valid, invalid = validate_orders(orders)
 transformed_data = transform_orders(valid)
+save_orders('data/processed/valid_orders.csv', transformed_data)
+save_orders('data/errors/invalid_orders.csv', invalid)
 
 print(f"Valid Orders: {len(valid)}")
 print(f"Valid Records: {valid}")
